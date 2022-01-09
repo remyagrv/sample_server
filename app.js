@@ -44,22 +44,22 @@ app.get('/home', function (req, res) {
             
         });
 })
-
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'grvcheradil@gmail.com',
+      pass: 'GRV3*cheradil'
+    }
+  });
 app.post('/emailvalidate', function (req, res) {
    var email = req.body.useremail;
    console.log(email);
 
    if (validator.validate(email)){
        res.send("Email id is valid");
-       var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'remyajose.mec@gmail.com',
-          pass: 'cheradilhouse'
-        }
-      });
+       
        var mailOptions = {
-        from: 'remyajose.mec@gmail.com',
+        from: 'grvcheradil@gmail.com',
         to: email,
         subject: 'Sending Email using Node.js',
         text: 'That was easy!'
