@@ -5,6 +5,7 @@ const path = require('path');
 const cors = require('cors');
 var bodyParser = require("body-parser");
 var validator = require("email-validator");
+var nodemailer = require('nodemailer');
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -21,25 +22,6 @@ app.get('/', function (req, res) {
         
         });
 })
-app.get('/home', function (req, res) {
-   
-    res.render("home",
-        {
-            
-        });
-})
-app.post('/emailvalidate', function (req, res) {
-   var email = req.body.useremail;
-   console.log(email);
-
-   if (validator.validate(email)){
-       res.send("Email id is valid and mail send!!");
-   }else{
-       res.send("Email id is invalid");
-   }
-    
-})
-
 
 app.post('/login', function (req, res) 
     
@@ -54,6 +36,48 @@ app.post('/login', function (req, res)
                     });
         
         });
+
+app.get('/home', function (req, res) {
+   
+    res.render("home",
+        {
+            
+        });
+})
+
+app.post('/emailvalidate', function (req, res) {
+   var email = req.body.useremail;
+   console.log(email);
+
+   if (validator.validate(email)){
+       res.send("Email id is valid");
+       var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'remyajose.mec@gmail.com',
+          pass: 'cheradilhouse'
+        }
+      });
+       var mailOptions = {
+        from: 'remyajose.mec@gmail.com',
+        to: email,
+        subject: 'Sending Email using Node.js',
+        text: 'That was easy!'
+      };
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email sent: ' + info.response);
+        }
+      });
+   }else{
+       res.send("Email id is invalid");
+   }
+    
+})
+
+
 
 
 
