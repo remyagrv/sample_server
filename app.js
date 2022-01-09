@@ -50,7 +50,7 @@ app.post('/emailvalidate', function (req, res) {
    console.log(email);
 
    if (validator.validate(email)){
-       res.send("Email id is valid");
+       
        var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -66,11 +66,14 @@ app.post('/emailvalidate', function (req, res) {
       };
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
+            res.send("Email id is valid but not sent.");
           console.log('Something went wrong: ' +error);
         } else {
+            res.send("Email id is valid and mail sent.");
           console.log('Email sent: ' + info.response);
         }
       });
+      
    }else{
        res.send("Email id is invalid");
    }
