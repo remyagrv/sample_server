@@ -66,11 +66,11 @@ app.post('/emailvalidate', function (req, res) {
       };
       transporter.sendMail(mailOptions, function(error, info){
         if (error) {
-            res.send("Email id is valid but not sent.");
+            res.send("Email id is valid but mail not sent.");
           console.log('Something went wrong: ' +error);
         } else {
-            res.send("Email id is valid and mail sent.");
-          console.log('Email sent: ' + info.response);
+            res.send("Email id is valid and Mail sent Successfully.");
+          console.log('Mail sent Successfully: ' + info.response);
         }
       });
       
@@ -81,11 +81,12 @@ app.post('/emailvalidate', function (req, res) {
 })
 
 
+const PORT = process.env.PORT || 3333;
 
 
+app.listen(PORT,()=>{
+    console.log("portnumber is "+PORT)}); 
 
-app.listen(3333);
-console.log("portnumber is 3333");
 
 
 
