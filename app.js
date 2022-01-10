@@ -45,7 +45,7 @@ app.get('/home', function (req, res) {
         });
 })
 
-app.post('/emailvalidate', function (req, res) {
+app.post('/mailer', function (req, res) {
    var email = req.body.useremail;
    console.log(email);
 
