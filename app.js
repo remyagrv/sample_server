@@ -85,7 +85,8 @@ const PORT = process.env.PORT || 3333;
 
 
 app.listen(PORT,()=>{
-    console.log("portnumber is "+PORT)}); 
+    console.log("portnumber is "+PORT);
+  }); 
 
 
 
